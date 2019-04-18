@@ -3,38 +3,46 @@ import React, { Component } from 'react';
 
 class App extends Component {
   state = {
-    data: {}, 
+    data: {},
   }
 
   async componentDidMount() {
     try {
       const response = await fetch('https://dog.ceo/api/breeds/list/all');
       const json = await response.json();
-      this.setState({data: json.message})
+      this.setState({ data: json.message })
       console.log("Here is the data...");
       console.log(this.state.data);
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
-
-    try {
-      let affenpinscher = Object.keys(this.state.data)[0];
-      const response = await fetch(`https://dog.ceo/api/breed/${affenpinscher}/images`);
-      const json = await response.json();
-      console.log("Pics of a single breed....");
-      console.log(json);
-    } catch(error) {
-      console.log(error);
-    }    
   }
-  
+
 
   render() {
+    const breedList = [];
+    for (let breed in this.state.data) {
+      breedList.push(<li key={breed}>{breed}</li>)
+      if (this.state.data[breed].length > 1) { //check for sub-breeds
+        const subBreed = [];
+        for (let sub of this.state.data[breed]) {
+          subBreed.push(<li key={sub}>{sub}</li>)
+        }
+        breedList.push(<ul>{subBreed}</ul>)
+      }
+    }
+
     return (
       <div className="App">
         <header className="App-header">
-          <h1>blank slate</h1>
+          <h1>BreedList</h1>
         </header>
+        <div>
+          <ul>
+            {breedList}
+          </ul>
+
+        </div>
       </div>
     );
   }
