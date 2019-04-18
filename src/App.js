@@ -5,6 +5,8 @@ import {BreedList} from './components/BreedList';
 class App extends Component {
   state = {
     data: {},
+    showBreeds: true,
+    selectedBreed: ''
   }
 
   async componentDidMount() {
@@ -19,6 +21,11 @@ class App extends Component {
     }
   }
 
+  handleClick = (e) => {
+    let breedName = e.target.innerHTML;
+    console.log(breedName);
+  }
+
   render() {
     return (
       <div className="App">
@@ -26,7 +33,7 @@ class App extends Component {
           <h1>BreedList</h1>
         </header>
         <div>
-          <BreedList breeds={this.state.data}/>
+          <BreedList handleClick={this.handleClick} breeds={this.state.data}/>
         </div>
       </div>
     );
