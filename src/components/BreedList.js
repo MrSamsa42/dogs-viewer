@@ -9,9 +9,9 @@ const BreedList = (props) => {
       if (breeds[breed].length > 1) { //check for sub-breeds
         const subBreed = [];
         for (sub of breeds[breed]) {
-          subBreed.push(<li onClick={handleClick} key={sub}>{sub}</li>);
+          subBreed.push(<li onClick={handleClick} key={sub}>{`${sub} ${breed}`}</li>);
         }
-        breedList.push(<ul key={breed + " " + sub}>{subBreed}</ul>);
+        breedList.push(<ul key={`${sub} ${breed}`}>{subBreed}</ul>);
       }
     }
     return (

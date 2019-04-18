@@ -23,7 +23,14 @@ class App extends Component {
 
   handleClick = (e) => {
     let breedName = e.target.innerHTML;
-    console.log(breedName);
+    this.setState({
+      showBreeds: false,
+      selectedBreed: breedName
+    })
+  }
+
+  handleReset = (e) => {
+    this.setState({showBreeds: true});
   }
 
   render() {
@@ -33,9 +40,17 @@ class App extends Component {
           <h1>BreedList</h1>
         </header>
         <div>
+          {this.state.showBreeds ? (
           <BreedList handleClick={this.handleClick} breeds={this.state.data}/>
-        </div>
-      </div>
+          ) : ( 
+          <div>
+            <h2>{this.state.selectedBreed}</h2>
+            
+            <button onClick={this.handleReset}>Reset</button>
+          </div>  
+          )}
+        </div> 
+      </div> 
     );
   }
 }
