@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {BreedList} from './components/BreedList';
+import {BreedView} from './components/BreedView';
 //import './App.css';
 
 class App extends Component {
@@ -34,6 +35,8 @@ class App extends Component {
   }
 
   render() {
+    
+
     return (
       <div className="App">
         <header className="App-header">
@@ -44,9 +47,11 @@ class App extends Component {
           <BreedList handleClick={this.handleClick} breeds={this.state.data}/>
           ) : ( 
           <div>
-            <h2>{this.state.selectedBreed}</h2>
-            
-            <button onClick={this.handleReset}>Reset</button>
+            <BreedView 
+               breedName={this.state.selectedBreed}
+               reset={this.handleReset}
+            />
+    
           </div>  
           )}
         </div> 
