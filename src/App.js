@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {BreedList} from './components/BreedList';
-import {BreedView} from './components/BreedView';
+import { BreedList } from './components/BreedList';
+import { BreedView } from './components/BreedView';
 //import './App.css';
 
 class App extends Component {
@@ -31,28 +31,39 @@ class App extends Component {
   }
 
   handleReset = (e) => {
-    this.setState({showBreeds: true});
+    this.setState({ showBreeds: true });
   }
 
   render() {
-    
+
 
     return (
-      <div className="container">
-        <div>
+      <div>
+        <div class="navbar">
+          <nav>
+            <div class="nav-wrapper">
+              <a href="#!" class="brand-logo">Logo</a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="badges.html">Components</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div> 
           {this.state.showBreeds ? (
-          <BreedList handleClick={this.handleClick} breeds={this.state.data}/>
-          ) : ( 
-          <div>
-            <BreedView 
-               breedName={this.state.selectedBreed}
-               reset={this.handleReset}
-            />
-    
-          </div>  
-          )}
-        </div> 
-      </div> 
+            <BreedList handleClick={this.handleClick} breeds={this.state.data} />
+          ) : (
+              <div>
+                <BreedView
+                  breedName={this.state.selectedBreed}
+                  reset={this.handleReset}
+                />
+
+              </div>
+            )}
+        </div>
+      </div> //close parent div
     );
   }
 }
