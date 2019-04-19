@@ -48,15 +48,12 @@ class BreedView extends Component {
             <div className="card-image">
               <img class="responsive-img" alt={this.props.breedName} src={pics[picIndex]} />
             </div>
-            <div className="card-content">
+            <div className="center">
               <p>Image {this.state.picIndex + 1} of {this.state.pics.length}</p>
             </div>
             <div className="card-action center">
-       
-                <button class="btn" onClick={reset}>Back to Breeds</button>
-                <button class="btn" onClick={this.handleNextClick}>Next {this.props.breedName} pic</button>
-        
-
+              <button class="btn" onClick={reset}>Back to Breeds</button>
+              <button class="btn" onClick={this.handleNextClick}>Next {this.props.breedName} pic</button>
             </div>
           </div>
         </div>
