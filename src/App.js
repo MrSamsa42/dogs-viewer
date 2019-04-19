@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   handleClick = (e) => {
-    let breedName = e.target.innerHTML;
+    let breedName = e.target.textContent;
     this.setState({
       showBreeds: false,
       selectedBreed: breedName
@@ -38,10 +38,7 @@ class App extends Component {
     
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1>BreedList</h1>
-        </header>
+      <div className="container">
         <div>
           {this.state.showBreeds ? (
           <BreedList handleClick={this.handleClick} breeds={this.state.data}/>
