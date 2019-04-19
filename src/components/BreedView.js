@@ -22,20 +22,17 @@ class BreedView extends Component {
       const response = await fetch(url);
       const json = await response.json();
       this.setState({ pics: json.message });
-      console.log("Here are the pics");
-      console.log(this.state.pics);
+      //console.log("Here are the pics");
+      console.log(`There are ${this.state.pics.length} pics`);
     } catch (error) {
       console.log(error);
     }
   }
 
-  handleClick = (e) => {
-     console.log("You clicked e.target");
-  }
-
-  showNextPic = (e) => {
+  handleNextClick = (e) => {
       let len = this.state.pics.length;
-      let next = Math.floor(Math.random() * len);
+      let next;
+      this.state.picIndex === len - 1 ? next = 0 : next = this.state.picIndex + 1;
       this.setState({picIndex: next});
   }
   
@@ -49,7 +46,7 @@ class BreedView extends Component {
           <img src={pics[picIndex]} alt=""/>
           <div>
             <button onClick={reset}>Reset</button>
-            <button onClick={this.showNextPic}>Next</button>
+            <button onClick={this.handleNextClick}>Next</button>
           </div>          
       </div> 
     );

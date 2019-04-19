@@ -15,8 +15,8 @@ class App extends Component {
       const response = await fetch('https://dog.ceo/api/breeds/list/all');
       const json = await response.json();
       this.setState({ data: json.message });
-      console.log("Here is the data...");
-      console.log(this.state.data);
+      //console.log("Here is the data...");
+      //console.log(this.state.data);
     } catch (error) {
       console.log(error);
     }
