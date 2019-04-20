@@ -45,11 +45,10 @@ class App extends Component {
             <div class="nav-wrapper teal">
               <div class="container">
               </div>
-              
             </div>
           </nav>
         </div>
-        <div> 
+        <div>
           {this.state.showBreeds ? (
             <BreedList handleClick={this.handleClick} breeds={this.state.data} />
           ) : (
