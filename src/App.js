@@ -23,6 +23,7 @@ class App extends Component {
   }
 
   handleClick = (e) => {
+    e.preventDefault();
     let breedName = e.target.textContent;
     this.setState({
       showBreeds: false,
@@ -41,12 +42,10 @@ class App extends Component {
       <div>
         <div class="navbar">
           <nav>
-            <div class="nav-wrapper">
-              <a href="#!" class="brand-logo">Logo</a>
-              <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-              </ul>
+            <div class="nav-wrapper teal">
+              <div class="container">
+              </div>
+              
             </div>
           </nav>
         </div>

@@ -22,7 +22,6 @@ class BreedView extends Component {
       const response = await fetch(url);
       const json = await response.json();
       this.setState({ pics: json.message });
-      //console.log("Here are the pics");
       console.log(`There are ${this.state.pics.length} pics`);
     } catch (error) {
       console.log(error);
@@ -35,6 +34,12 @@ class BreedView extends Component {
       this.state.picIndex === len - 1 ? next = 0 : next = this.state.picIndex + 1;
       this.setState({picIndex: next});
   }
+
+  handlePrevClick = (e) => {
+    let prev;
+    this.state.picIndex === 0 ? prev = 0 : prev = this.state.picIndex - 1;
+    this.setState({picIndex: prev});
+}
   
   render() {
     const {pics, picIndex} = this.state;
@@ -53,6 +58,7 @@ class BreedView extends Component {
             </div>
             <div className="card-action center">
               <button class="btn" onClick={reset}>Back to Breeds</button>
+              <button class="btn" onClick={this.handlePrevClick}>Previous {this.props.breedName} pic</button>
               <button class="btn" onClick={this.handleNextClick}>Next {this.props.breedName} pic</button>
             </div>
           </div>
