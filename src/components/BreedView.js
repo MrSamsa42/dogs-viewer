@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class BreedView extends Component {
   state = {
     pics: [], 
-    picIndex: 0
+    picIndex: 0,
+    breedName: '',
+    subBreed: ''
   }
 
   async componentDidMount() {
-    let {breedName} = this.props;
+    
+    let breedName = this.props.match.params.breedName;
     let subBreed = '';
+
     let url = 'https://dog.ceo/api/breed/';
+
     if(breedName.indexOf(' ') > -1){
         const names = breedName.split(' ');
         breedName = names[1];
@@ -17,6 +23,11 @@ class BreedView extends Component {
     }
     url += `${breedName}/`
     subBreed ? url += `${subBreed}/images` : url += 'images';
+
+    this.setState({
+      breedName: breedName,
+      subBreed: subBreed
+    })
 
     try {
       const response = await fetch(url);
@@ -42,24 +53,29 @@ class BreedView extends Component {
 }
   
   render() {
+    console.log(this.props);
     const {pics, picIndex} = this.state;
-    const {reset} = this.props;
 
     return (
       <div className="row">
         <div className="col s12">
-          <h1 className="breed-name center">{this.props.breedName}</h1>
+          <h4 className="breed-name center">{this.state.breedName}</h4>
           <div className="card">
             <div className="card-image">
-              <img class="responsive-img" alt={this.props.breedName} src={pics[picIndex]} />
+              <img className="responsive-img" alt={this.state.breedName} src={pics[picIndex]} />
             </div>
             <div className="center">
               <p>Image {this.state.picIndex + 1} of {this.state.pics.length}</p>
             </div>
             <div className="card-action center">
-              <button class="btn" onClick={reset}>Back to Breeds</button>
-              <button class="btn" onClick={this.handlePrevClick}>Previous {this.props.breedName} pic</button>
-              <button class="btn" onClick={this.handleNextClick}>Next {this.props.breedName} pic</button>
+              <Link
+              className="btn"
+              to="/"
+              >
+              Back to Breeds
+              </Link>
+              <button className="btn" onClick={this.handlePrevClick}>Previous</button>
+              <button className="btn" onClick={this.handleNextClick}>Next</button>
             </div>
           </div>
         </div>
