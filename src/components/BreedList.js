@@ -39,7 +39,7 @@ class BreedList extends React.Component {
         //const subBreed = [];
         for (sub of breeds[breed]) {
           //subBreed.push(<li className="collection-item" onClick={handleClick} key={sub}><h5>{`${sub} ${breed}`}</h5></li>);
-          breedList.push(<li className="collection-item breed-list-name" onClick={this.handleClick} key={sub + breed}><Link to={sub + "%20" + breed}>{sub} {breed}</Link></li>);
+          breedList.push(<li className="collection-item breed-list-name" onClick={this.handleClick} key={sub + breed}><Link to={sub + "%20" + breed}>{breed} ({sub})</Link></li>);
         }
         //breedList.push(<ul key={`${sub} ${breed}`}>{subBreed}</ul>);
       } else {
@@ -48,7 +48,7 @@ class BreedList extends React.Component {
     }
     return (
         <div className="container">
-          <h2 className="center">Choose a breed</h2>
+          <h3 className="center">Choose a breed</h3>
           <div className="breed-list-container">
             <ul>
               {breedList}
