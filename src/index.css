@@ -20,8 +20,8 @@
 }
 
 .card-image {
-min-height: 30vh;
-max-height: 40vh;
+min-height: 40vh;
+max-height: 50vh;
 height: 100vh;
 }
 
