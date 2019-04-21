@@ -7,7 +7,6 @@ const TopNav = (props) => {
             <nav>
                 <div className="nav-wrapper teal">
                     <Link to="/" className="brand-logo">Breed Explorer</Link>
-                    {/* <a className="right" href="https://dog.ceo/dog-api/">Powered by Dog API</a> */}
                 </div>
             </nav>
         </div>

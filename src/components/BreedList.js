@@ -13,8 +13,6 @@ class BreedList extends React.Component {
       const response = await fetch('https://dog.ceo/api/breeds/list/all');
       const json = await response.json();
       this.setState({ data: json.message });
-      //console.log("Here is the data...");
-      //console.log(this.state.data);
     } catch (error) {
       console.log(error);
     }
@@ -24,7 +22,6 @@ class BreedList extends React.Component {
     e.preventDefault();
     let breedName = e.target.textContent;
     this.setState({
-      //showBreeds: false,
       selectedBreed: breedName
     })
   }
@@ -34,14 +31,10 @@ class BreedList extends React.Component {
     const breedList = [];
     let breed, sub;
     for (breed in breeds) {
-      //breedList.push(<li className="collection-header" onClick={handleClick} key={breed}><h5>{breed}</h5></li>);
       if (breeds[breed].length > 1) { //check for sub-breeds
-        //const subBreed = [];
         for (sub of breeds[breed]) {
-          //subBreed.push(<li className="collection-item" onClick={handleClick} key={sub}><h5>{`${sub} ${breed}`}</h5></li>);
           breedList.push(<li className="collection-item breed-list-name" onClick={this.handleClick} key={sub + breed}><Link to={sub + "%20" + breed}>{breed} ({sub})</Link></li>);
         }
-        //breedList.push(<ul key={`${sub} ${breed}`}>{subBreed}</ul>);
       } else {
         breedList.push(<li className="collection-item breed-list-name" onClick={this.handleClick} key={breed}><Link to={breed}>{breed}</Link></li>);
       }

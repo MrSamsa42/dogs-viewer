@@ -3,7 +3,6 @@ import { TopNav }  from './components/TopNav';
 import { BreedList } from './components/BreedList';
 import { BreedView } from './components/BreedView';
 import { BrowserRouter, Route } from 'react-router-dom';
-//import './App.css';
 
 class App extends Component {
 
