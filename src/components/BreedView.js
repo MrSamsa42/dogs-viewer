@@ -54,12 +54,11 @@ class BreedView extends Component {
   
   render() {
     console.log(this.props);
-    const {pics, picIndex} = this.state;
-
+    const {breedName, subBreed, pics, picIndex} = this.state;
     return (
       <div className="row">
         <div className="col s12">
-          <h4 className="breed-name center">{this.state.breedName}</h4>
+          <h4 className="breed-name center">{subBreed + ' ' + breedName}</h4>
           <div className="card">
             <div className="card-image">
               <img className="responsive-img" alt={this.state.breedName} src={pics[picIndex]} />
