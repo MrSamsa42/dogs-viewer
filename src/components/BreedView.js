@@ -61,10 +61,10 @@ class BreedView extends Component {
           <h4 className="breed-name center">{subBreed + ' ' + breedName}</h4>
           <div className="card">
             <div className="card-image">
-              <img className="responsive-img" alt={this.state.breedName} src={pics[picIndex]} />
+              <img className="responsive-img" alt={subBreed + ' ' + breedName} src={pics[picIndex]} />
             </div>
             <div className="center">
-              <p>Image {this.state.picIndex + 1} of {this.state.pics.length}</p>
+              <p>Image {picIndex + 1} of {pics.length}</p>
             </div>
             <div className="card-action center">
               <Link
