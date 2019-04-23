@@ -17,7 +17,7 @@ const RenderError = ({errorStatus}) => {
         return (
         <div className="row">
           <div className="col s12">
-            <h4 className="error-text">{errorText}</h4>
+            <h4 className="center error-text">{errorText}</h4>
             <div className="center">
               <Link
                 className="btn"

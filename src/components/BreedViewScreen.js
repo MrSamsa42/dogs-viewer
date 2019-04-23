@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader } from './Loader';
+import { RenderError } from './RenderError'
 
 class BreedViewScreen extends Component {
   state = {
@@ -9,16 +10,16 @@ class BreedViewScreen extends Component {
     breedName: '',
     subBreed: '',
     isLoading: true,
-    loadError: false
+    errorMessage: ''
   };
 
   async componentDidMount() {
-    
+    //get breed and subbreed names from path parameters
     let breedName = this.props.match.params.breedName;
     let subBreed = '';
 
+    //build correct url from breed and subbreed names
     let url = 'https://dog.ceo/api/breed/';
-
     if(breedName.indexOf(' ') > -1){
         const names = breedName.split(' ');
         breedName = names[1];
@@ -27,17 +28,34 @@ class BreedViewScreen extends Component {
     url += `${breedName}/`;
     subBreed ? url += `${subBreed}/images` : url += 'images';
 
+    //set state here to show name while fetching pics
     this.setState({
       breedName: breedName,
       subBreed: subBreed,
     });
 
+    await this.handleFetch(url);
+  }
+
+  handleFetch = async (url) => {
     try {
       const response = await fetch(url);
       const json = await response.json();
-      json.status === 'success' ? this.setState({pics: json.message, isLoading: false}) : this.setState({loadError: true, isLoading: false});
-      console.log(`There are ${this.state.pics.length} pics`);
+      if(json.status === 'success') {
+        this.setState({
+          pics: json.message, 
+          isLoading: false,
+        });
+      } else if(json.status === 'error') { //misspelled breed name in path
+        this.setState({
+          isLoading: false,
+          errorMessage: 'invalid breed'
+        });
+      }
     } catch (error) {
+      this.setState({
+        errorMessage: 'API error'
+      });
       console.log(error);
     }
   }
@@ -57,7 +75,7 @@ class BreedViewScreen extends Component {
   
   render() {
     const { breedName, subBreed, pics, picIndex } = this.state;
-    return !this.state.loadError ?
+    return !this.state.errorMessage  ?
       (
         <div className="row">
           <div className="col s12">
@@ -84,7 +102,7 @@ class BreedViewScreen extends Component {
                 >
                   Back to Breeds
               </Link>
-                <button className="btn" onClick={this.handlePrevClick}>Previous</button>
+                <button className={this.state.picIndex === 0 ? "btn disabled" : "btn"} onClick={this.handlePrevClick}>Previous</button>
                 <button className="btn" onClick={this.handleNextClick}>Next</button>
               </div>
             </div>
@@ -92,21 +110,7 @@ class BreedViewScreen extends Component {
         </div>
       )
       :
-      (
-        <div className="row">
-          <div className="col s12">
-            <h4 className="invalid-breed-name center">Invalid breed name!</h4>
-            <div className="center">
-              <Link
-                className="btn"
-                to="/"
-              >
-                Back to Breeds
-                </Link>
-                </div>
-            </div>
-          </div>
-      );
+      <RenderError errorStatus={this.state.errorMessage}/>
   }
 }
 
