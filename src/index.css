@@ -32,7 +32,7 @@ height: 100vh;
   padding-top: 15px;
 }
 
-.invalid-breed-name {
+.error-text {
   color: red;
 }
 

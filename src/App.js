@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TopNav }  from './components/TopNav';
 import { BreedSelectScreen } from './components/BreedSelectScreen';
-import { BreedView } from './components/BreedView';
+import { BreedViewScreen } from './components/BreedViewScreen';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
         <div>
           <TopNav />
           <Route exact path='/' component={BreedSelectScreen} />
-          <Route path='/:breedName' component={BreedView} />
+          <Route path='/:breedName' component={BreedViewScreen} />
         </div> 
       </BrowserRouter>
     );

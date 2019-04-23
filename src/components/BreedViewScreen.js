@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader } from './Loader';
 
-class BreedView extends Component {
+class BreedViewScreen extends Component {
   state = {
     pics: [], 
     picIndex: 0,
@@ -17,7 +17,7 @@ class BreedView extends Component {
     let breedName = this.props.match.params.breedName;
     let subBreed = '';
 
-    let url = 'https://dog.ceo/api/breed/9';
+    let url = 'https://dog.ceo/api/breed/';
 
     if(breedName.indexOf(' ') > -1){
         const names = breedName.split(' ');
@@ -110,4 +110,4 @@ class BreedView extends Component {
   }
 }
 
-export {BreedView};
+export {BreedViewScreen};
