@@ -10,14 +10,14 @@ class BreedView extends Component {
     subBreed: '',
     isLoading: true,
     loadError: false
-  }
+  };
 
   async componentDidMount() {
     
     let breedName = this.props.match.params.breedName;
     let subBreed = '';
 
-    let url = 'https://dog.ceo/api/breed/';
+    let url = 'https://dog.ceo/api/breed/9';
 
     if(breedName.indexOf(' ') > -1){
         const names = breedName.split(' ');
@@ -30,7 +30,7 @@ class BreedView extends Component {
     this.setState({
       breedName: breedName,
       subBreed: subBreed,
-    })
+    });
 
     try {
       const response = await fetch(url);

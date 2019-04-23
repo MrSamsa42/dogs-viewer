@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TopNav }  from './components/TopNav';
-import { BreedList } from './components/BreedList';
+import { BreedSelectScreen } from './components/BreedSelectScreen';
 import { BreedView } from './components/BreedView';
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <TopNav />
-          <Route exact path='/' component={BreedList} />
+          <Route exact path='/' component={BreedSelectScreen} />
           <Route path='/:breedName' component={BreedView} />
         </div> 
       </BrowserRouter>
