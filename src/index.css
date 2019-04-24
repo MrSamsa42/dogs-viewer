@@ -7,12 +7,15 @@
   text-transform: capitalize;
 }
 
+
+
 .breed-list-container {
   margin-top: 3rem
 }
 
 .breed-list-name {
-  font-size: 1.5rem
+  font-size: 1.5rem;
+  text-transform: capitalize;
 }
 
 .brand-logo {

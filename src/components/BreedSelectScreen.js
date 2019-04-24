@@ -42,7 +42,7 @@ class BreedSelectScreen extends React.Component {
   render() {
     return (
         <div className="container">
-          <h3 className="center">Choose a breed</h3>
+          <h3 className="center">Select a breed to view photos</h3>
           <div className="breed-list-container">
             <ListOfBreeds breeds={this.state.data} />
           </div>
