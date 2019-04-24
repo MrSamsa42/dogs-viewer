@@ -47,7 +47,7 @@ class BreedViewScreen extends Component {
           pics: json.message, 
           isLoading: false,
         });
-      } else if(json.status === 'error') { //misspelled breed name in path
+      } else if(json.status === 'error') { //e.g. misspelled breed name in path
         this.setState({
           isLoading: false,
           errorMessage: 'Invalid breed name'
@@ -85,7 +85,6 @@ class BreedViewScreen extends Component {
 }
   
   render() {
-    console.log(this.state);
     const { breedName, subBreed, pics, picIndex } = this.state;
     return !this.state.errorMessage  ?
       (
