@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader } from './Loader';
-import { RenderError } from './RenderError'
+import { ErrorScreen } from './ErrorScreen'
 
 class BreedViewScreen extends Component {
   state = {
@@ -50,12 +50,12 @@ class BreedViewScreen extends Component {
       } else if(json.status === 'error') { //misspelled breed name in path
         this.setState({
           isLoading: false,
-          errorMessage: 'invalid breed'
+          errorMessage: 'Invalid breed name'
         });
       }
     } catch (error) {
       this.setState({
-        errorMessage: 'API error'
+        errorMessage: 'Network or API error'
       });
       console.log(error);
     }
@@ -85,6 +85,7 @@ class BreedViewScreen extends Component {
 }
   
   render() {
+    console.log(this.state);
     const { breedName, subBreed, pics, picIndex } = this.state;
     return !this.state.errorMessage  ?
       (
@@ -127,7 +128,7 @@ class BreedViewScreen extends Component {
         </div>
       )
       :
-      <RenderError errorStatus={this.state.errorMessage}/>
+      <ErrorScreen errorMessage={this.state.errorMessage}/>
   }
 }
 
