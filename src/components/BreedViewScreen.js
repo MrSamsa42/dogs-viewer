@@ -10,7 +10,8 @@ class BreedViewScreen extends Component {
     breedName: '',
     subBreed: '',
     isLoading: true,
-    errorMessage: ''
+    errorMessage: '',
+    imageStatus: 'loading'
   };
 
   async componentDidMount() {
@@ -60,7 +61,16 @@ class BreedViewScreen extends Component {
     }
   }
 
+  handleImageLoaded = () => {
+    document.getElementById("nextButton").classList.remove('disabled');
+  }
+
+  handleImageErrored = () => {
+    document.getElementById("nextButton").classList.remove('disabled');
+  }
+
   handleNextClick = (e) => {
+    document.getElementById("nextButton").classList.add('disabled');
       let len = this.state.pics.length;
       let next;
       this.state.picIndex === len - 1 ? next = 0 : next = this.state.picIndex + 1;
@@ -68,6 +78,7 @@ class BreedViewScreen extends Component {
   }
 
   handlePrevClick = (e) => {
+    document.getElementById("nextButton").classList.add('disabled');
     let prev;
     this.state.picIndex === 0 ? prev = 0 : prev = this.state.picIndex - 1;
     this.setState({picIndex: prev});
@@ -87,7 +98,13 @@ class BreedViewScreen extends Component {
                   <Loader />
                 )
                   : (
-                    <img className="responsive-img" alt={subBreed + ' ' + breedName} src={pics[picIndex]} />
+                    <img 
+                    className="responsive-img" 
+                    alt={subBreed + ' ' + breedName} 
+                    src={pics[picIndex]} 
+                    onLoad={this.handleImageLoaded}
+                    onError={this.handleImageErrored}
+                    />
                   )
                 }
 
@@ -102,8 +119,8 @@ class BreedViewScreen extends Component {
                 >
                   Back to Breeds
               </Link>
-                <button className={this.state.picIndex === 0 ? "btn disabled" : "btn"} onClick={this.handlePrevClick}>Previous</button>
-                <button className="btn" onClick={this.handleNextClick}>Next</button>
+                <button id="prevButton" className={this.state.picIndex === 0 ? "btn disabled" : "btn"} onClick={this.handlePrevClick}>Previous</button>
+                <button id="nextButton" className="btn disabled" onClick={this.handleNextClick}>Next</button>
               </div>
             </div>
           </div>
