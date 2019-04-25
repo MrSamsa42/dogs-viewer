@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { BreedViewScreen } from '../BreedViewScreen';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 const fakeData = {
     status: "success",
@@ -42,6 +42,13 @@ describe('BreedViewScreen', () => {
                 isLoading: false,
                 errorMessage: ''
             });
+
+            const nextButton = wrapper.find('#next-button');
+            const prevButton = wrapper.find('#prev-button');
+
+            expect(nextButton.hasClass('disabled')).toBe(true)
+            expect(prevButton.hasClass('disabled')).toBe(true)
+            
 
             global.fetch.mockClear();
             done();
