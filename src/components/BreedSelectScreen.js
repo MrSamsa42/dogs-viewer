@@ -1,9 +1,8 @@
 import React from 'react';
-import {ListOfBreeds} from './ListOfBreeds';
+import { ListOfBreeds } from './ListOfBreeds';
 
 
 class BreedSelectScreen extends React.Component {
-
   state = {
     data: {},
     selectedBreed: '',
@@ -19,9 +18,9 @@ class BreedSelectScreen extends React.Component {
     try {
       const response = await fetch(url);
       const json = await response.json();
-      this.setState({ 
-        data: json.message, 
-        status: 'done' 
+      this.setState({
+        data: json.message,
+        status: 'done'
       });
     } catch (error) {
       this.setState({
@@ -31,24 +30,16 @@ class BreedSelectScreen extends React.Component {
     }
   }
 
-  handleClick = (e) => {
-    e.preventDefault();
-    let breedName = e.target.textContent;
-    this.setState({
-      selectedBreed: breedName
-    })
-  }
-
   render() {
     return (
-        <div className="container">
-          <h3 className="center">Select a breed to view photos</h3>
-          <div className="breed-list-container">
-            <ListOfBreeds breeds={this.state.data} />
-          </div>
+      <div className="container">
+        <h3 className="center">Select a breed to view photos</h3>
+        <div className="breed-list-container">
+          <ListOfBreeds breeds={this.state.data} />
         </div>
+      </div>
     );
   }
 }
 
-  export {BreedSelectScreen};
+export { BreedSelectScreen };

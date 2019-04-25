@@ -5,13 +5,12 @@ import { ErrorScreen } from './ErrorScreen'
 
 class BreedViewScreen extends Component {
   state = {
-    pics: [], 
+    pics: [],
     picIndex: 0,
     breedName: '',
     subBreed: '',
     isLoading: true,
     errorMessage: '',
-    imageStatus: 'loading'
   };
 
   async componentDidMount() {
@@ -21,10 +20,10 @@ class BreedViewScreen extends Component {
 
     //build correct url from breed and subbreed names
     let url = 'https://dog.ceo/api/breed/';
-    if(breedName.indexOf(' ') > -1){
-        const names = breedName.split(' ');
-        breedName = names[1];
-        subBreed = names[0];
+    if (breedName.indexOf(' ') > -1) {
+      const names = breedName.split(' ');
+      breedName = names[1];
+      subBreed = names[0];
     }
     url += `${breedName}/`;
     subBreed ? url += `${subBreed}/images` : url += 'images';
@@ -42,12 +41,12 @@ class BreedViewScreen extends Component {
     try {
       const response = await fetch(url);
       const json = await response.json();
-      if(json.status === 'success') {
+      if (json.status === 'success') {
         this.setState({
-          pics: json.message, 
+          pics: json.message,
           isLoading: false,
         });
-      } else if(json.status === 'error') { //e.g. misspelled breed name in path
+      } else if (json.status === 'error') { //e.g. misspelled breed name in path
         this.setState({
           isLoading: false,
           errorMessage: 'Invalid breed name'
@@ -61,32 +60,52 @@ class BreedViewScreen extends Component {
     }
   }
 
-  handleImageLoaded = () => {
-    document.getElementById("nextButton").classList.remove('disabled');
-  }
-
-  handleImageErrored = () => {
-    document.getElementById("nextButton").classList.remove('disabled');
-  }
-
+  /*
+    Disable 'next' button after each click to prevent clicking faster than the images load.
+    Increment picIndex counter to load the next image
+  */
   handleNextClick = (e) => {
-    document.getElementById("nextButton").classList.add('disabled');
-      let len = this.state.pics.length;
-      let next;
-      this.state.picIndex === len - 1 ? next = 0 : next = this.state.picIndex + 1;
-      this.setState({picIndex: next});
+    document.getElementById("next-button").classList.add('disabled');
+    let len = this.state.pics.length;
+    let next;
+    this.state.picIndex === len - 1 ? next = 0 : next = this.state.picIndex + 1;
+    this.setState({ picIndex: next });
   }
 
+  /*
+    Disable 'previous' button after each click to prevent clicking faster than the images load.
+    (Note: maybe be unnessary, as images are cached by the browser)
+    Decrement picIndex counter to load previous image
+  */
   handlePrevClick = (e) => {
-    document.getElementById("nextButton").classList.add('disabled');
+    document.getElementById("prev-button").classList.add('disabled');
     let prev;
     this.state.picIndex === 0 ? prev = 0 : prev = this.state.picIndex - 1;
-    this.setState({picIndex: prev});
-}
-  
+    this.setState({ picIndex: prev });
+  }
+
+  /*
+    Once image has loaded, re-enable 'next' button to allow user to proceed to the next image
+  */
+  handleImageLoaded = () => {
+    document.getElementById("next-button").classList.remove('disabled');
+    if (this.state.picIndex > 0) {
+      document.getElementById("prev-button").classList.remove('disabled');
+    }
+  }
+
+  /*
+    If the image fails to load, re-enable 'next' button to allow user to move past it
+  */
+  handleImageErrored = () => {
+    document.getElementById("next-button").classList.remove('disabled');
+  }
+
+
+
   render() {
     const { breedName, subBreed, pics, picIndex } = this.state;
-    return !this.state.errorMessage  ?
+    return !this.state.errorMessage ?
       (
         <div className="row">
           <div className="col s12">
@@ -98,19 +117,19 @@ class BreedViewScreen extends Component {
                   <Loader />
                 )
                   : (
-                    <img 
-                    className="responsive-img" 
-                    alt={subBreed + ' ' + breedName} 
-                    src={pics[picIndex]} 
-                    onLoad={this.handleImageLoaded}
-                    onError={this.handleImageErrored}
+                    <img
+                      className="responsive-img"
+                      alt={subBreed + ' ' + breedName}
+                      src={pics[picIndex]}
+                      onLoad={this.handleImageLoaded}
+                      onError={this.handleImageErrored}
                     />
                   )
                 }
 
               </div>
               <div className="center">
-                <p>Image {picIndex + 1} of {pics.length}</p>
+                <p>Image <span id="pic-number">{picIndex + 1}</span> of {pics.length}</p>
               </div>
               <div className="card-action center">
                 <Link
@@ -119,16 +138,16 @@ class BreedViewScreen extends Component {
                 >
                   Back to Breeds
               </Link>
-                <button id="prevButton" className={this.state.picIndex === 0 ? "btn disabled" : "btn"} onClick={this.handlePrevClick}>Previous</button>
-                <button id="nextButton" className="btn disabled" onClick={this.handleNextClick}>Next</button>
+                <button id="prev-button" className={picIndex === 0 ? "btn disabled" : "btn"} onClick={this.handlePrevClick}>Previous</button>
+                <button id="next-button" className="btn disabled" onClick={this.handleNextClick}>Next</button>
               </div>
             </div>
           </div>
         </div>
       )
       :
-      <ErrorScreen errorMessage={this.state.errorMessage}/>
+      <ErrorScreen errorMessage={this.state.errorMessage} />
   }
 }
 
-export {BreedViewScreen};
+export { BreedViewScreen };

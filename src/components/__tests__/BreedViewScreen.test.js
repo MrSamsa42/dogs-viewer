@@ -40,8 +40,7 @@ describe('BreedViewScreen', () => {
                 breedName: 'affenpinscher',
                 subBreed: '',
                 isLoading: false,
-                errorMessage: '',
-                imageStatus: 'loading'
+                errorMessage: ''
             });
 
             global.fetch.mockClear();
