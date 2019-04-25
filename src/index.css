@@ -58,10 +58,12 @@ ul {
           -webkit-column-width: 150px;
           -moz-column-width: 150px;
                column-width: 150px;
-  margin-bottom: 50px;   
-  margin-left: 20px;  
+  padding-bottom: 20px;  
+  padding-top: 10px; 
+  margin-left: 80px;  
 }
 
 .nav-wrapper{
   height: 100%;
 }
+

@@ -37,13 +37,13 @@ class BreedSelectScreen extends React.Component {
     )
     : (
       <div className="container">
-      <h4 className="center">Select a breed to view photos</h4>
-      <div className="card">
-        
-        <div className="breed-list-container">
-          <ListOfBreeds breeds={this.state.data} />
+        <h4 className="center">Select a breed to view photos</h4>
+        <div className="card">  
+          <div className="breed-list-container">
+            <ListOfBreeds breeds={this.state.data} />
+          </div>
         </div>
-      </div>
+
       </div>
     );
   }
