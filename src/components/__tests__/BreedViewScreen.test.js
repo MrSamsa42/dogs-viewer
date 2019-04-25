@@ -51,11 +51,14 @@ describe('BreedViewScreen', () => {
             //count should display number pics equivalent to the length of the array of pics received from API
             expect(wrapper.find('#number-of-pics').text()).toEqual('3')
 
+            //start pic count on 1
+            expect(wrapper.find('#pic-number').text()).toEqual('1')
+
+            //image source should be first pic in array of pics received from API
+            expect(wrapper.find('img').prop("src")).toEqual('https://images.dog.ceo/breeds/affenpinscher/n02110627_10147.jpg');
+
             global.fetch.mockClear();
             done();
         });
     });
-
-
-
 });
