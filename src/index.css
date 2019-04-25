@@ -1,4 +1,19 @@
 
+/** change widths for mobile to contain brand-logo text**/
+@media only screen and (max-width: 600px) {
+	.navbar {
+		min-width: 100% !important;
+	}
+
+	.navbar .row {
+		min-width: 100% !important;
+	}
+
+    .brand-logo {
+        font-size: 1em !important;
+    }
+}
+
 .btn {
   margin: 5px;
 }
