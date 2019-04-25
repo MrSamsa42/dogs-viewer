@@ -14,7 +14,7 @@ const ListOfBreeds = ({breeds}) => {
       }
     }
     return (
-      <ul>
+      <ul >
         {breedList}
       </ul>
     )

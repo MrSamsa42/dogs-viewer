@@ -7,14 +7,12 @@
   text-transform: capitalize;
 }
 
-
-
 .breed-list-container {
   margin-top: 3rem
 }
 
 .breed-list-name {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-transform: capitalize;
 }
 
@@ -33,6 +31,10 @@ height: 100vh;
   max-height: 100%;
   object-fit: contain;
   padding-top: 15px;
+}
+
+.collection-item {
+ padding: 3px;
 }
 
 .error-text {
@@ -56,7 +58,7 @@ ul {
           -webkit-column-width: 150px;
           -moz-column-width: 150px;
                column-width: 150px;
-     
+  margin-bottom: 50px;     
 }
 
 

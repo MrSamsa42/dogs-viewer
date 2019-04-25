@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListOfBreeds } from './ListOfBreeds';
+import { ErrorScreen } from './ErrorScreen';
 
 
 class BreedSelectScreen extends React.Component {
@@ -24,20 +25,23 @@ class BreedSelectScreen extends React.Component {
       });
     } catch (error) {
       this.setState({
-        status: 'error'
+        status: 'Network or API error'
       });
       console.log(error);
     }
   }
 
   render() {
-    return (
+    return this.state.status === 'done' ? (
       <div className="container">
-        <h3 className="center">Select a breed to view photos</h3>
+        <h4 className="center">Select a breed to view photos</h4>
         <div className="breed-list-container">
           <ListOfBreeds breeds={this.state.data} />
         </div>
       </div>
+    )
+    : (
+      <ErrorScreen errorMessage={this.state.status}/>
     );
   }
 }
