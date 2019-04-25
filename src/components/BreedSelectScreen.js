@@ -32,16 +32,19 @@ class BreedSelectScreen extends React.Component {
   }
 
   render() {
-    return this.state.status === 'done' ? (
+    return this.state.status === 'Network or API error' ? (
+      <ErrorScreen errorMessage={this.state.status}/>
+    )
+    : (
       <div className="container">
-        <h4 className="center">Select a breed to view photos</h4>
+      <h4 className="center">Select a breed to view photos</h4>
+      <div className="card">
+        
         <div className="breed-list-container">
           <ListOfBreeds breeds={this.state.data} />
         </div>
       </div>
-    )
-    : (
-      <ErrorScreen errorMessage={this.state.status}/>
+      </div>
     );
   }
 }
