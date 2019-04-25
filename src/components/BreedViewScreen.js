@@ -129,7 +129,7 @@ class BreedViewScreen extends Component {
 
               </div>
               <div className="center">
-                <p>Image <span id="pic-number">{picIndex + 1}</span> of {pics.length}</p>
+                <p>Image <span id="pic-number">{picIndex + 1}</span> of <span id="number-of-pics">{pics.length}</span></p>
               </div>
               <div className="card-action center">
                 <Link
