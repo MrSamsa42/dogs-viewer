@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { BreedViewScreen } from '../BreedViewScreen';
-import { shallow } from 'enzyme';
+import { MemoryRouter, Link } from 'react-router-dom';
+import { shallow, mount } from 'enzyme';
 
 const fakeData = {
     status: "success",
@@ -13,6 +14,11 @@ const fakeData = {
 }
 
 describe('BreedViewScreen', () => {
+
+    it('displays a back button that links to the BreedSelectScreen (root path)', () => {
+        const wrapper = mount(<MemoryRouter><BreedViewScreen /></MemoryRouter>);
+        expect(wrapper.find(Link).prop('to')).toBe('/');
+    })
 
     it('fetches list of photos for a given breed and sets state appropriately', done => {
         const mockSuccessResponse = fakeData;
