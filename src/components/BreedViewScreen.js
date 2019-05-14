@@ -11,6 +11,8 @@ class BreedViewScreen extends Component {
     subBreed: '',
     isLoading: true,
     errorMessage: '',
+    imageIsLoading: true,
+    imageLoadError: false
   };
 
   async componentDidMount() {
@@ -65,40 +67,35 @@ class BreedViewScreen extends Component {
     Increment picIndex counter to load the next image
   */
   handleNextClick = (e) => {
-    document.getElementById("next-button").classList.add('disabled');
     let len = this.state.pics.length;
     let next;
     this.state.picIndex === len - 1 ? next = 0 : next = this.state.picIndex + 1;
-    this.setState({ picIndex: next });
+    this.setState({ picIndex: next, imageIsLoading: true });
   }
 
   /*
     Disable 'previous' button after each click to prevent clicking faster than the images load.
-    (Note: maybe be unnessary, as images are cached by the browser)
+    (Note: may be unnessary, as images are cached by the browser)
     Decrement picIndex counter to load previous image
   */
   handlePrevClick = (e) => {
-    document.getElementById("prev-button").classList.add('disabled');
     let prev;
     this.state.picIndex === 0 ? prev = 0 : prev = this.state.picIndex - 1;
-    this.setState({ picIndex: prev });
+    this.setState({ picIndex: prev, imageIsLoading: true});
   }
 
   /*
-    Once image has loaded, re-enable 'next' button to allow user to proceed to the next image
+    Once image has loaded, set imageIsLoading to 'false' so as to re-enable 'next' button and allow user to proceed to the next image
   */
   handleImageLoaded = () => {
-    document.getElementById("next-button").classList.remove('disabled');
-    if (this.state.picIndex > 0) {
-      document.getElementById("prev-button").classList.remove('disabled');
-    }
+    this.setState({imageIsLoading: false})
   }
 
   /*
-    If the image fails to load, re-enable 'next' button to allow user to move past it
+    If the image fails to load, set imageIsLoading to 'false' so as to re-enable 'next' button and allow user to move past it
   */
   handleImageErrored = () => {
-    document.getElementById("next-button").classList.remove('disabled');
+    this.setState({imageIsLoading: false})
   }
 
 
@@ -139,7 +136,7 @@ class BreedViewScreen extends Component {
                   Back to Breeds
               </Link>
                 <button id="prev-button" className={picIndex === 0 ? "btn disabled" : "btn"} onClick={this.handlePrevClick}>Previous</button>
-                <button id="next-button" className="btn disabled" onClick={this.handleNextClick}>Next</button>
+                <button id="next-button" className={this.state.imageIsLoading ? "btn disabled" : "btn"} onClick={this.handleNextClick}>Next</button>
               </div>
             </div>
           </div>
