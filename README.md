@@ -1,3 +1,14 @@
+There’s a burgeoning market for dog pictures! Help us visualize the world’s canines by building the following.  
+ 
+Using the free and open Dog API (https://dog.ceo/dog-api/) please use React to build an application with the following requirements: 
+When the user loads the app a list of dog breeds is displayed
+When the user clicks on a dog breed displays a single picture of that breed
+While viewing a breed the user is able to
+Refresh the image with another image of that breed
+Navigate back to the list of breeds
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
